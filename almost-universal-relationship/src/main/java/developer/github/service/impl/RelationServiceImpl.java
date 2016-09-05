@@ -1,6 +1,5 @@
 package developer.github.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import developer.github.async.AsyncProducer;
 import developer.github.async.event.RemoveRelationEvent;
 import developer.github.dao.RelationDao;
@@ -35,10 +34,6 @@ public class RelationServiceImpl implements RelationService {
     @Autowired
     @Qualifier("relationDao")
     private RelationDao relationDao;
-
-    @Autowired
-    @Qualifier("objectMapper")
-    private ObjectMapper objectMapper;
 
     @Autowired
     @Qualifier("relationAsyncProducer")

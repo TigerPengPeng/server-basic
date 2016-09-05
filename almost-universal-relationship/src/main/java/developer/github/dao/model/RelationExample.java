@@ -715,6 +715,76 @@ public class RelationExample {
             return (Criteria) this;
         }
 
+        public Criteria andClazzIsNull() {
+            addCriterion("clazz is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzIsNotNull() {
+            addCriterion("clazz is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzEqualTo(String value) {
+            addCriterion("clazz =", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzNotEqualTo(String value) {
+            addCriterion("clazz <>", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzGreaterThan(String value) {
+            addCriterion("clazz >", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzGreaterThanOrEqualTo(String value) {
+            addCriterion("clazz >=", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzLessThan(String value) {
+            addCriterion("clazz <", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzLessThanOrEqualTo(String value) {
+            addCriterion("clazz <=", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzLike(String value) {
+            addCriterion("clazz like", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzNotLike(String value) {
+            addCriterion("clazz not like", value, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzIn(List<String> values) {
+            addCriterion("clazz in", values, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzNotIn(List<String> values) {
+            addCriterion("clazz not in", values, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzBetween(String value1, String value2) {
+            addCriterion("clazz between", value1, value2, "clazz");
+            return (Criteria) this;
+        }
+
+        public Criteria andClazzNotBetween(String value1, String value2) {
+            addCriterion("clazz not between", value1, value2, "clazz");
+            return (Criteria) this;
+        }
+
         public Criteria andRelatedTypeIsNull() {
             addCriterion("related_type is null");
             return (Criteria) this;

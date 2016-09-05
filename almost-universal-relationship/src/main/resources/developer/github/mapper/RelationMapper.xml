@@ -12,6 +12,7 @@
     <result column="object_id" jdbcType="BIGINT" property="objectId" />
     <result column="object_type" jdbcType="INTEGER" property="objectType" />
     <result column="related" jdbcType="VARCHAR" property="related" />
+    <result column="clazz" jdbcType="VARCHAR" property="clazz" />
     <result column="related_type" jdbcType="INTEGER" property="relatedType" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, created_by_id, created_at, updated_by_id, updated_at, version, status, object_id, 
-    object_type, related, related_type
+    object_type, related, clazz, related_type
   </sql>
   <select id="selectByExample" parameterType="developer.github.dao.model.RelationExample" resultMap="BaseResultMap">
     select
@@ -101,17 +102,19 @@
     insert into t_relation (id, created_by_id, created_at, 
       updated_by_id, updated_at, version, 
       status, object_id, object_type, 
-      related, related_type)
+      related, clazz, related_type
+      )
     values (#{id,jdbcType=BIGINT}, #{createdById,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedById,jdbcType=BIGINT}, #{updatedAt,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}, 
       #{status,jdbcType=INTEGER}, #{objectId,jdbcType=BIGINT}, #{objectType,jdbcType=INTEGER}, 
-      #{related,jdbcType=VARCHAR}, #{relatedType,jdbcType=INTEGER})
+      #{related,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR}, #{relatedType,jdbcType=INTEGER}
+      )
   </insert>
 
   <insert id="batchInsert" parameterType="list">
     insert into t_relation (id, created_by_id,
     created_at, updated_by_id, updated_at,
-    object_id, object_type, related, related_type
+    object_id, object_type, related, clazz, related_type
     )
     values
     <foreach item="item" index="index" collection="list" open="" separator="," close="">
@@ -124,6 +127,7 @@
       #{item.objectId,jdbcType=BIGINT},
       #{item.objectType,jdbcType=INTEGER},
       #{item.related,jdbcType=VARCHAR},
+      #{item.clazz,jdbcType=VARCHAR},
       #{item.relatedType,jdbcType=INTEGER}
       )
     </foreach>
@@ -132,7 +136,7 @@
   <insert id="batchInsertRemoveRelation" parameterType="list">
     insert into t_relation_remove (id, created_by_id,
     created_at, updated_by_id, updated_at,
-    object_id, object_type, related, related_type
+    object_id, object_type, related, clazz, related_type
     )
     values
     <foreach item="item" index="index" collection="list" open="" separator="," close="">
@@ -145,6 +149,7 @@
       #{item.objectId,jdbcType=BIGINT},
       #{item.objectType,jdbcType=INTEGER},
       #{item.related,jdbcType=VARCHAR},
+      #{item.clazz,jdbcType=VARCHAR},
       #{item.relatedType,jdbcType=INTEGER}
       )
     </foreach>
@@ -183,6 +188,9 @@
       <if test="related != null">
         related,
       </if>
+      <if test="clazz != null">
+        clazz,
+      </if>
       <if test="relatedType != null">
         related_type,
       </if>
@@ -217,6 +225,9 @@
       </if>
       <if test="related != null">
         #{related,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null">
+        #{clazz,jdbcType=VARCHAR},
       </if>
       <if test="relatedType != null">
         #{relatedType,jdbcType=INTEGER},
@@ -262,6 +273,9 @@
       <if test="record.related != null">
         related = #{record.related,jdbcType=VARCHAR},
       </if>
+      <if test="record.clazz != null">
+        clazz = #{record.clazz,jdbcType=VARCHAR},
+      </if>
       <if test="record.relatedType != null">
         related_type = #{record.relatedType,jdbcType=INTEGER},
       </if>
@@ -282,6 +296,7 @@
       object_id = #{record.objectId,jdbcType=BIGINT},
       object_type = #{record.objectType,jdbcType=INTEGER},
       related = #{record.related,jdbcType=VARCHAR},
+      clazz = #{record.clazz,jdbcType=VARCHAR},
       related_type = #{record.relatedType,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -317,6 +332,9 @@
       <if test="related != null">
         related = #{related,jdbcType=VARCHAR},
       </if>
+      <if test="clazz != null">
+        clazz = #{clazz,jdbcType=VARCHAR},
+      </if>
       <if test="relatedType != null">
         related_type = #{relatedType,jdbcType=INTEGER},
       </if>
@@ -334,6 +352,7 @@
       object_id = #{objectId,jdbcType=BIGINT},
       object_type = #{objectType,jdbcType=INTEGER},
       related = #{related,jdbcType=VARCHAR},
+      clazz = #{clazz,jdbcType=VARCHAR},
       related_type = #{relatedType,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>

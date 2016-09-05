@@ -187,14 +187,13 @@ public class RelationDaoImpl implements RelationDao {
 
         Subject subject = null;
         try {
-            JSONObject jsonObject = new JSONObject(model.getRelated());
-            Class<?> clazz = Class.forName(jsonObject.getString("clazz"));
-            Object objectValue = jsonObject.get("object");
+            Class<?> clazz = Class.forName(model.getClazz());
+            String objectValue = model.getRelated();
             Object object;
             if (clazz.equals(String.class)) {
                 object = objectValue;
             } else {
-                object = objectMapper.readValue(objectValue.toString(), clazz);
+                object = objectMapper.readValue(objectValue, clazz);
             }
             subject = new Subject(object, RelatedType.getByType(model.getRelatedType()));
 
@@ -253,7 +252,10 @@ public class RelationDaoImpl implements RelationDao {
         model.setObjectType(relation.getObjectType().getType());
 
         try {
-            model.setRelated(objectMapper.writeValueAsString(relation.getRelated()));
+            Object object = relation.getRelated().getObject();
+            Class<?> clazz = relation.getRelated().getClazz();
+            model.setRelated(objectMapper.writeValueAsString(object));
+            model.setClazz(clazz.getName());
         } catch (JsonProcessingException e) {
             log.error("{}", e);
         }

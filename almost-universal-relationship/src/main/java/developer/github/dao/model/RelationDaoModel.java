@@ -26,6 +26,8 @@ public class RelationDaoModel {
 
     private String related;
 
+    private String clazz;
+
     private Integer relatedType;
 }
 
