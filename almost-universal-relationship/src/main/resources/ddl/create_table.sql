@@ -9,10 +9,12 @@ CREATE TABLE `t_relation` (
   `object_id` bigint(20) DEFAULT NULL COMMENT '主体id',
   `object_type` int(11) DEFAULT NULL COMMENT '主体type',
   `related` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '关联属性',
+  `clazz` varchar(500) DEFAULT NULL COMMENT '关联属性的java class',
   `related_type` int(11) DEFAULT NULL COMMENT '关联对象',
   PRIMARY KEY (`id`),
   KEY `idx_objectId_status_relatedType` (`object_id`,`status`,`related_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 CREATE TABLE `t_relation_remove` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '系统内部ID',
@@ -25,6 +27,7 @@ CREATE TABLE `t_relation_remove` (
   `object_id` bigint(20) DEFAULT NULL COMMENT '主体id',
   `object_type` int(11) DEFAULT NULL COMMENT '主体type',
   `related` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '关联属性',
+  `clazz` varchar(500) DEFAULT NULL COMMENT '关联属性的java class',
   `related_type` int(11) DEFAULT NULL COMMENT '关联对象',
   PRIMARY KEY (`id`),
   KEY `idx_objectId_relatedType` (`object_id`,`related_type`)
